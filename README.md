@@ -234,19 +234,16 @@ Cardano’s staking system is **uniquely user-friendly**, prioritizing accessibi
 - Every account’s balance is stored in a **global database** visible to the network.
 - Transactions update balances directly in this shared ledger.
 
-**Global Ledger:**
+```sh
+Global Ledger:
+- Alice: 100 DOT
+- Bob: 50 DOT
 
-**\- Alice: 100 DOT**
-
-**\- Bob: 50 DOT**
-
-**Transaction: Alice sends 20 DOT to Bob**
-
-**→ Global Ledger updates to:**
-
-**\- Alice: 80 DOT**
-
-**\- Bob: 70 DOT**
+Transaction: Alice sends 20 DOT to Bob
+→ Global Ledger updates to:
+ - Alice: 80 DOT
+ - Bob: 70 DOT
+```
 
 **Key Features**:
 
@@ -267,21 +264,17 @@ Cardano’s staking system is **uniquely user-friendly**, prioritizing accessibi
 - Each UTXO is like a unique bill with a value and ownership tag.
 - **Transactions consume UTXOs** and create new ones, like handing over cash and receiving change.
 
-**Alice’s Wallet:**
+```sh
+Alice’s Wallet:
+ - UTXO 1: 50 ADA (Wallet A)
+ - UTXO 2: 50 ADA (Wallet B)
 
-**\- UTXO 1: 50 ADA (Wallet A)**
-
-**\- UTXO 2: 50 ADA (Wallet B)**
-
-**Transaction: Alice sends 70 ADA to Bob**
-
-**→ Consumes UTXO 1 (50 ADA) + UTXO 2 (50 ADA)**
-
-**→ Creates:**
-
-**\- New UTXO for Bob: 70 ADA (Wallet C)**
-
-**\- New UTXO for Alice (change): 30 ADA (Wallet A or D)**
+Transaction: Alice sends 70 ADA to Bob
+→ Consumes UTXO 1 (50 ADA) + UTXO 2 (50 ADA)
+→ Creates:
+ - New UTXO for Bob: 70 ADA (Wallet C) 
+ - New UTXO for Alice (change): 30 ADA (Wallet A or D)
+```
 
 **Key Features**:
 
