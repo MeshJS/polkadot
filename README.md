@@ -2,6 +2,9 @@
 
 **_Guidelines for a smooth learning journey at [Polkadot](https://polkadot.com/) from a Cardano’s developer perspective_**
 
+## [Intro - Navigating the Polkadot Ecosystem](000/0001.md)
+To quickly get you oriented with Polkadot's key resources
+
 ## [Chapter 1 - Building on Polkadot: Solutions and Comparisons](100/1001.md)
 A few insightful information on general comparison of Polkadot and Cardano from a builders perspective
 
