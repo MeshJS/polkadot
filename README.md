@@ -32,9 +32,9 @@ Simple guide to help you to building your first smart contract on Polkadot, usin
 
 What is ERC20 and why is needed on Polkadot
 
-### Building a dApp with Ink!
+### [Building a dApp with Ink!](200/2003.md)
 
-... work in progress ...
+Let's add a web interface to this smart contracts
 
 ## 3. Something new, parathread
 ... work in progress...
