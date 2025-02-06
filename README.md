@@ -28,13 +28,13 @@ Comparing some important key differences of eUTXO and Account based models
 
 Simple guide to help you to building your first smart contract on Polkadot, using Ink!
 
-### [Native Tokens or ERC-20](200/2002.md)
+### [Building a dApp with Ink!](200/2002.md)
+
+Let's add a web interface to this smart contract
+
+### [Native Tokens or ERC-20](200/2003.md)
 
 What is ERC20 and why is needed on Polkadot
-
-### [Building a dApp with Ink!](200/2003.md)
-
-Let's add a web interface to this smart contracts
 
 ## 3. Something new, parathread
 ... work in progress...
