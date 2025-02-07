@@ -32,9 +32,13 @@ Simple guide to help you to building your first smart contract on Polkadot, usin
 
 Let's add a web interface to this smart contract
 
-### [Native Tokens or ERC-20](200/2003.md)
+### [ERC-20 or Cardano Native (Fungible) Tokens](200/2003.md)
 
-What is ERC20 and why is needed on Polkadot
+What is ERC-20 and why is it needed on Polkadot and not Cardano?
+
+### [ERC-721 or Cardano Native NTFs](200/2004.md)
+
+What is ERC-721 and why is it needed on Polkadot and not Cardano?
 
 ## 3. Something new, parathread
 ... work in progress...
