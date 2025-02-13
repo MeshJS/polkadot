@@ -24,7 +24,7 @@ Comparing some important key differences of eUTXO and Account based models
 
 ## 2. Let's start getting some hands-on experience with the code
 
-### [Building a Smart Contract using Ink! and Astar](200/2001.md)
+### [Building a Smart Contract using Ink! (Rust) and Astar](200/2001.md)
 
 Simple guide to help you to building your first smart contract on Polkadot, using Ink!
 
@@ -40,5 +40,10 @@ What is ERC-20 and why is it needed on Polkadot and not Cardano?
 
 What is ERC-721 and why is it needed on Polkadot and not Cardano?
 
+### [Building a Smart Contract using Ask! (TypeScript)](200/2005.md)
+
+Did you know you can also write contracts in TypeScript?
+
 ## 3. Something new, parathread
+
 ... work in progress...
