@@ -44,6 +44,14 @@ What is ERC-721 and why is it needed on Polkadot and not Cardano?
 
 Did you know you can also write contracts in TypeScript?
 
+### [A GiftCard HashMap based, in Ink!](200/2006.md)
+
+What is ERC-721 and why is it needed on Polkadot and not Cardano?
+
+### [A GiftCard NFTs (PSP34) based, in Ink!](200/2007.md)
+
+... work in progress...
+
 ## 3. Something new, parathread
 
 ... work in progress...
