@@ -46,9 +46,11 @@ Did you know you can also write contracts in TypeScript?
 
 ### [A Giftcard HashMap based](200/2006.md)
 
-Implementing a basic Giftcard feature in Ink! using a HashMap
+Implementing a basic Giftcard in Ink! using a HashMap
 
 ### [A Giftcard NFTs (PSP34) based](200/2007.md)
+
+Another Giftcard implementation but using NFTs and OpenBrush libs
 
 ... work in progress...
 
