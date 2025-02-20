@@ -48,9 +48,13 @@ Did you know you can also write contracts in TypeScript?
 
 Implementing a basic Giftcard in Ink! using a HashMap
 
-### [A Giftcard NFTs (PSP34) based](200/2007.md)
+### [PSP34 and OpenBrush](200/2007.md)
 
-Another Giftcard implementation but using NFTs and OpenBrush libs
+Using PSP34, Polkadot's NFT standard, and testing the OpenBrush implementation
+
+### [A Giftcard NFTs (PSP34) based](200/2008.md)
+
+Another Giftcard implementation but with PSP34
 
 ... work in progress...
 
