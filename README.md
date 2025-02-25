@@ -52,11 +52,9 @@ Implementing a basic Giftcard in Ink! using a HashMap
 
 Using PSP34, Polkadot's NFT standard, and testing the OpenBrush implementation
 
-### [A Giftcard NFTs (PSP34) based](200/2008.md)
+### [A Giftcard NFTs based](200/2008.md)
 
-Another Giftcard implementation but with PSP34
-
-... work in progress...
+Another Giftcard implementation, but not PSP34
 
 ## 3. Something new, parathread
 
