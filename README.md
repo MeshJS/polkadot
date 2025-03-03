@@ -56,6 +56,10 @@ Using PSP34, Polkadot's NFT standard, and testing the OpenBrush implementation
 
 Another Giftcard implementation, but not PSP34
 
+### [Building a Payment Splitter](200/2009.md)
+
+A handy payment splitter in Ink!
+
 ## 3. Something new, parathread
 
 ... work in progress...
