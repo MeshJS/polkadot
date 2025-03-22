@@ -24,14 +24,14 @@ const wallet = new MeshWallet({
 In the following `api` would be an instance of a connected polkadot.js api
 ```
 
-methods:
+### Endpoints
 
-- wallet.getBalance(address?)
+#### wallet.getBalance(address?)
 
 With no argument returns wallet own balance. Optional argument to fetch balance for different account.
 Calls `api.derive.balances.all` (or `api.derive.balances.account`?).
 
-- wallet.getAccount(address)
+#### wallet.getAccount(address)
 
 Can be used to resolve different address formats to its corresponding accountId. Called with no args return wallet own account (provided by key in initialisation).
 
@@ -43,20 +43,20 @@ getChangeAddress does not apply either as there are no utxos, thus no change.
 
 see below for getRewardAddresses
 
-- wallet.getNetworkId()
+#### wallet.getNetworkId()
 
 This doesn't make sense in polkadot? Maybe return parachain we are connected to?
 
-- wallet.getRewardAddresses?
+#### wallet.getRewardAddresses?
 
 Addresses don't have a staking component as in cardano. Generally it is recommended to split staking in 2 accounts: stash and proxy (cfr. https://wiki.polkadot.network/docs/learn-staking#stash-account-and-staking-proxy) the idea is stash holds the funds bonded for staking (remember, staking is not liquid on polkadot cfr. https://polkadot.meshjs.dev/en/wiki/1_theory_and_comparison/1002), but delegates all staking decisions to a proxy account.
 Not sure what we could do here, you would need to instantiate the meshJs wallet once with the stash key and once with the proxy. We could link them somehow, but then this defeats the point of splitting them?
 
-- wallet.signData
+#### wallet.signData
 
 cfr. https://polkadot.js.org/docs/extension/cookbook#sign-a-message
 
-- wallet.signTx / wallet.submitTx
+#### wallet.signTx / wallet.submitTx
 
 cfr. https://polkadot.js.org/docs/extension/cookbook#sign-and-send-a-transaction
 
