@@ -1,5 +1,5 @@
 import { ApiPromise, WsProvider, Keyring } from "@polkadot/api";
-import { IPolkadotWallet } from "../../interfaces";
+import { IPolkadotWallet } from "../interfaces";
 import { GenericExtrinsic } from "@polkadot/types";
 import { KeypairType } from "@polkadot/util-crypto/types";
 import { KeyringPair } from "@polkadot/keyring/types";

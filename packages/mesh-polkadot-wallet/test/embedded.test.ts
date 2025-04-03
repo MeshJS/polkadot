@@ -1,9 +1,7 @@
-import { GenericExtrinsic } from "@polkadot/types";
 import { EmbeddedWallet } from "../src/embedded";
 
 describe("EmbeddedWallet privateKey", () => {
   const walletMnemonic = new EmbeddedWallet({
-    networkId: 0,
     wsProvider: "ws://127.0.0.1:54321",
     keypairType: "ed25519",
     key: {

@@ -1,0 +1,39 @@
+name: Test
+on:
+  push:
+    paths:
+      - ".github/workflows/**"
+      - "packages/**"
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "packages/**"
+jobs:
+  test:
+    name: Test with Polkadot zombienet
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Polkadot
+        run: npm run setup-devnet -- -y
+
+      - name: Run tests
+        run: |
+          # Start Zombienet in the background
+          npm run devnet &
+
+          # Wait for network to be ready
+          sleep 30
+
+          # Run npm tests
+          npm run test
