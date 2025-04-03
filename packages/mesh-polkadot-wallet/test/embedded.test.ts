@@ -35,20 +35,23 @@ describe("EmbeddedWallet privateKey", () => {
     },
   });
 
-  it("should be able to init wallet", async () => {
+  beforeAll(async () => {
     await walletMnemonic.init();
+  });
+
+  afterAll(async () => {
+    await walletMnemonic.disconnect();
+  });
+
+  it("should be able to init wallet", async () => {
     expect(await walletMnemonic.isInitialized()).toBe(true);
   });
 
   it("sign transaction", async () => {
-    await walletMnemonic.init();
-
     const unsignedTx = "";
-
     expect(await walletMnemonic.verifySignature(unsignedTx)).toBe(false);
 
     const signedTx = await walletMnemonic.signTx(unsignedTx);
-
     expect(await walletMnemonic.verifySignature(signedTx)).toBe(true);
   });
 });

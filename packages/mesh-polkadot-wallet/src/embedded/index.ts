@@ -35,9 +35,8 @@ export class EmbeddedWallet implements IPolkadotWallet {
   private readonly _keyringPair: KeyringPair;
 
   constructor(options: CreatePolkadotEmbeddedWalletOptions) {
-    this._wsProvider = new WsProvider(options.wsProvider);
+    this._wsProvider = new WsProvider(options.wsProvider, false);
     this._keyring = new Keyring({ type: options.keypairType });
-
     switch (options.key.type) {
       case "mnemonic": {
         this._keyringPair = this._keyring.addFromMnemonic(
@@ -59,7 +58,14 @@ export class EmbeddedWallet implements IPolkadotWallet {
    * Initialise a wallet, connecting to a network
    */
   async init() {
+    this._wsProvider.connect();
     this._api = await ApiPromise.create({ provider: this._wsProvider });
+  }
+
+  async disconnect() {
+    await this._api?.disconnect();
+    this._api = undefined;
+    await this._wsProvider.disconnect();
   }
 
   async isInitialized(): Promise<boolean> {

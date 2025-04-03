@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Polkadot
+      - name: Setup Zombienet
         run: npm run setup-devnet -- -y
 
       - name: Start Zombienet in the background

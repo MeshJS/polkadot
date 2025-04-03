@@ -3,6 +3,7 @@ import type { Config } from "jest";
 const jestConfig: Config = {
   clearMocks: true,
   maxWorkers: 1,
+  maxConcurrency: 1,
   testEnvironment: "node",
   testMatch: ["**/packages/**/*.test.ts"],
   setupFiles: ["dotenv/config"],
