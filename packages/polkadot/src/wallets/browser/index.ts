@@ -1,9 +1,12 @@
-import { Signer } from "@polkadot/api/types";
+import { Signer, SubmittableExtrinsic } from "@polkadot/api/types";
+import { Hash } from "@polkadot/types/interfaces"
 import { IPolkadotWallet } from "../../interfaces";
 import { web3Accounts, web3Enable, web3FromAddress } from '@polkadot/extension-dapp';
 import { InjectedAccount } from "@polkadot/extension-inject/types"
 import { ApiPromise } from "@polkadot/api";
 import { ContractPromise } from '@polkadot/api-contract';
+import { Codec } from "@polkadot/types/types";
+import { ContractCallOutcome } from "@polkadot/api-contract/types";
 
 export type CreatePolkadotBrowserWalletOptions = {
   // networkId: 0 | 1;
@@ -55,5 +58,20 @@ export class BrowserWallet implements IPolkadotWallet {
     const contract = new ContractPromise(this.api, abi, address);
     // TODO: check if name already exists on this.contracts
     this.contracts[name] = contract;
+  }
+
+  async awaitTx(tx: SubmittableExtrinsic<'promise'>): Promise<Hash> {
+    return tx.signAndSend(this.account.address)
+  }
+
+  async query(query: Promise<ContractCallOutcome>): Promise<Codec> {
+    const { result, output } = await query
+
+    // check if the call was successful
+    if (result.isOk && output) {
+      return output
+    } else {
+      throw result.asErr
+    }
   }
 }
