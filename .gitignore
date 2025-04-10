@@ -42,7 +42,7 @@ Thumbs.db
 
 
 # Polkadot executables for testing
-polkadot
-polkadot-execute-worker
-polkadot-parachain
-polkadot-prepare-worker
+/polkadot
+/polkadot-execute-worker
+/polkadot-parachain
+/polkadot-prepare-worker
