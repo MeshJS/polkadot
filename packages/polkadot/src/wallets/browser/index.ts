@@ -1,77 +1,87 @@
-import { Signer, SubmittableExtrinsic } from "@polkadot/api/types";
-import { Hash } from "@polkadot/types/interfaces"
+import { ApiOptions, Signer } from "@polkadot/api/types";
 import { IPolkadotWallet } from "../../interfaces";
 import { web3Accounts, web3Enable, web3FromAddress } from '@polkadot/extension-dapp';
-import { InjectedAccount } from "@polkadot/extension-inject/types"
 import { ApiPromise } from "@polkadot/api";
-import { ContractPromise } from '@polkadot/api-contract';
-import { Codec } from "@polkadot/types/types";
-import { ContractCallOutcome } from "@polkadot/api-contract/types";
+import { initPolkadotApi, WsProviderOptions } from "../../core";
+import { Account } from "../../types/account";
 
 export type CreatePolkadotBrowserWalletOptions = {
-  // networkId: 0 | 1;
-  api: ApiPromise;
-  account: InjectedAccount;
-  signer: Signer;
+  provider: WsProviderOptions;
+  api: ApiOptions;
 };
 
+export type Wallet = {
+  name: string;
+  version: string;
+}
 
-export class BrowserWallet implements IPolkadotWallet {
-  readonly api: ApiPromise;
-  readonly contracts: { [name: string]: ContractPromise }
-  readonly account: InjectedAccount;
+export class BrowserWallet extends IPolkadotWallet {
+  private constructor(
+    api: ApiPromise,
+    account: Account,
+    readonly signer: Signer
+  ) { super(api, account); }
 
-  constructor(options: CreatePolkadotBrowserWalletOptions) {
-    this.api = options.api;
-    this.api.setSigner(options.signer);
-    this.account = options.account;
-    this.contracts = {}
+  async signData(payload: string) {
+    if (this.signer.signRaw) {
+      const { signature } = await this.signer.signRaw({
+        address: this.account.address,
+        data: payload,
+        type: 'bytes'
+      });
+      return signature
+    } else {
+      throw new Error('Signer unable to sign raw data')
+    }
   }
 
-  // TODO: should we return the pair here or only the account? The signer can be derived for that, but it would require
-  // another async call after initialisation (like wallet.setOwnSigner())
+  /**
+   * Returns a list of wallets installed on user's device. Each wallet is an object with the following properties:
+   * - A name is provided to display wallet's name on the user interface.
+   * - A version is provided to display wallet's version on the user interface.
+   *
+   * @returns a list of wallet names
+   */
+  static async getAvailableWallets(originName: string = 'mesh-sdk'): Promise<Wallet[]> {
+    const extensions = await web3Enable(originName);
+    if (extensions.length === 0) {
+      throw new Error('No extension installed');
+    }
+    return extensions
+  }
 
-  // TODO change this to an interface like mesh-wallet/browser-wallet. Alloy querying for all extensions and accounts and then construct the instance with an enable call
-  static async connectWallet (originName: string = 'mesh-sdk') : Promise<[InjectedAccount, Signer]> {
+  /**
+   * This is the entrypoint to start communication with the user's wallet. The wallet should request the user's permission to connect the web page to the user's wallet, and if permission has been granted, the wallet will be returned and exposing the full API for the dApp to use.
+   *
+   * Query BrowserWallet.getAvailableWallets() to get a list of available wallets, then provide the wallet name for which wallet the user would like to connect with.
+   *
+   * @param walletName - the name of the wallet to enable (e.g. "talisman")
+   * @param extensions - optional, a list of CIPs that the wallet should support
+   * @returns WalletInstance
+   */
+  static async enable(
+    walletName: string,
+    options: CreatePolkadotBrowserWalletOptions,
+  ): Promise<BrowserWallet> {
     try {
-      const extensions = await web3Enable(originName);
-      if (extensions.length === 0) {
-        throw new Error('No extension installed');
-      }
-
-      const accounts = await web3Accounts();
-
+      const accounts = await web3Accounts({extensions: [walletName]});
       if (accounts.length === 0) {
         throw new Error('No accounts found');
       }
-      // finds an injector for an address
-      const injector = await web3FromAddress(accounts[0]!.address);
+      // TODO: how do we select the account?
+      const account = accounts[0]!;
 
-      return [accounts[0]!, injector.signer];
-    } catch (err: any) {
-      throw(`Wallet connection failed: ${err.message}`);
-    }
-  };
+      const api = await initPolkadotApi(options.provider, options.api);
 
-  // TODO: support different ways of loading contracts
-  loadContract(name: string, abi: string, address: string) {
-    const contract = new ContractPromise(this.api, abi, address);
-    // TODO: check if name already exists on this.contracts
-    this.contracts[name] = contract;
-  }
+      const injector = await web3FromAddress(account.address);
 
-  async awaitTx(tx: SubmittableExtrinsic<'promise'>): Promise<Hash> {
-    return tx.signAndSend(this.account.address)
-  }
-
-  async query(query: Promise<ContractCallOutcome>): Promise<Codec> {
-    const { result, output } = await query
-
-    // check if the call was successful
-    if (result.isOk && output) {
-      return output
-    } else {
-      throw result.asErr
+      return new BrowserWallet(api, account, injector.signer);
+    } catch (error) {
+      throw new Error(
+        `[BrowserWallet] An error occurred during enable: ${JSON.stringify(
+          error,
+        )}.`,
+      );
     }
   }
 }

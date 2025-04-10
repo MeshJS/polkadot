@@ -8,6 +8,7 @@ type WsProviderOptions = {
   timeout?: number;
   cacheCapacity?: number;
 }
+
 async function initPolkadotApi(
   provider: WsProviderOptions | string,
   apiOptions?: ApiOptions
@@ -29,3 +30,4 @@ async function initPolkadotApi(
 }
 
 export { initPolkadotApi, ApiPromise, WsProvider };
+export type { WsProviderOptions };
