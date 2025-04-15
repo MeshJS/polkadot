@@ -10,11 +10,6 @@ export type CreatePolkadotBrowserWalletOptions = {
   api: ApiOptions;
 };
 
-export type Wallet = {
-  name: string;
-  version: string;
-}
-
 export class BrowserWallet extends IPolkadotWallet {
   private constructor(
     api: ApiPromise,
