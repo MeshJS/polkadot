@@ -1,5 +1,5 @@
 {
-  "name": "@polkadot/mesh-react",
+  "name": "@polkadot/react",
   "version": "1.9.0-beta.3",
   "description": "React component library - https://meshjs.dev/react",
   "main": "./dist/index.cjs",

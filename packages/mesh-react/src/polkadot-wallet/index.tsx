@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { Check } from "lucide-react";
-import { Wallet, BrowserWallet, CreatePolkadotBrowserWalletOptions } from "@meshsdk/polkadot";
-// import { useWalletList } from "../hooks/useWalletList";
+import { BrowserWallet, CreatePolkadotBrowserWalletOptions, Wallet } from "@meshsdk/polkadot";
+import { useWalletList } from "../hooks/useWalletList";
 
 type ConnectProps = {
   options: CreatePolkadotBrowserWalletOptions
 }
 
 export const ConnectWallet: React.FC<ConnectProps> = ({ options }) => {
-  // const wallets = useWalletList();
-  const [wallets, setWallets] = useState<Wallet[]>([]);
+  const wallets = useWalletList();
   const [selectedWallet, setSelectedWallet] = useState<Wallet | null>(null);
   const [connecting, setConnecting] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    async function get() {
-      setWallets(await BrowserWallet.getAvailableWallets());
-    }
-    get();
-  }, []);
 
   const handleSelectWallet = async (wallet: Wallet) => {
     setConnecting(true);
