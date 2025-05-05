@@ -33,3 +33,8 @@ export abstract class IPolkadotWallet {
    */
   abstract signData(payload: string): Promise<string>
 }
+
+export type Wallet = {
+  name: string;
+  version: string;
+}

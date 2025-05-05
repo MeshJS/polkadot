@@ -1,19 +1,14 @@
 import { ApiOptions, Signer } from "@polkadot/api/types";
-import { IPolkadotWallet } from "../../interfaces";
+import { IPolkadotWallet, Wallet } from "../../interfaces";
 import { web3Accounts, web3Enable, web3FromAddress } from '@polkadot/extension-dapp';
 import { ApiPromise } from "@polkadot/api";
 import { initPolkadotApi, WsProviderOptions } from "../../core";
 import { Account } from "../../types/account";
 
 export type CreatePolkadotBrowserWalletOptions = {
-  provider: WsProviderOptions;
+  provider: WsProviderOptions | string;
   api: ApiOptions;
 };
-
-export type Wallet = {
-  name: string;
-  version: string;
-}
 
 export class BrowserWallet extends IPolkadotWallet {
   private constructor(
